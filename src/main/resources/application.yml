@@ -1,0 +1,36 @@
+##端口号，上下文环境
+server:
+  port: 8080
+  servlet:
+    context-path: /crm
+
+## 数据源配置
+spring:
+
+  freemarker:
+    content-type: text/html
+    suffix: .ftl
+    template-loader-path: classpath:/views/
+    charset: utf-8
+
+  datasource:
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/crm?serverTimezone=GMT&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+## mybatis配置
+mybatis:
+  # 映射文件
+  mapper-locations: classpath:/mappers/*.xml
+  # 别名包
+  type-aliases-package: com.shsxt.crm.vo;com.shsxt.crm.po
+  # 驼峰方法名
+  configuration:
+    map-underscore-to-camel-case: true
+
+## 分页
+pagehelper:
+  helper-dialect: mysql

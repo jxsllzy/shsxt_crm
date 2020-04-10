@@ -12,45 +12,54 @@ function openTab(text, url, iconCls){
     }
 }
 
-
+/**
+ * 用户退出
+ */
 function logout() {
-    $.messager.confirm("来自crm","确定退出系统?",function (r) {
-        if(r){
-            $.removeCookie("userIdStr");
-            $.removeCookie("userName");
-            $.removeCookie("trueName");
-            $.messager.alert("来自crm","系统将在三秒后自动退出...","info");
-            setTimeout(function () {
-                window.location.href=ctx+"/index";
-            },3000);
-        }
-    })
+    $.messager.confirm("来自crm","确定退出系统?",function (r){
+     if(r){
+         $.removeCookie("userIdStr");
+         $.removeCookie("userName");
+         $.removeCookie("trueName");
+         $.messager.alert("来自crm","系统将在3秒后自动退出","info");
+         setTimeout(function () {
+             window.location.href = ctx+"/index";
+         },3000);
+     }
+    });
 }
 
-
+/**
+ * 打开模态框
+ */
 function openPasswordModifyDialog() {
     $("#dlg").dialog("open").dialog("setTitle","密码修改");
 }
 
+/**
+ * 确认修改密码
+ */
 function modifyPassword() {
     $("#fm").form("submit",{
         url:ctx+"/user/updatePassword",
         onSubmit:function () {
+            //验证
             return $("#fm").form("validate");
         },
         success:function (data) {
-            data =JSON.parse(data);
+            data = JSON.parse(data);
             if(data.code==200){
-                $.messager.alert("来自crm","密码修改成功,系统将在5秒后执行退出操作...","info");
                 $.removeCookie("userIdStr");
                 $.removeCookie("userName");
                 $.removeCookie("trueName");
+                $.messager.alert("来自crm","密码修改成功，3秒后跳转登录页面","info");
                 setTimeout(function () {
-                    window.location.href=ctx+"/index";
-                },5000)
+                    window.location.href = ctx+"/index";
+                },3000);
             }else{
                 $.messager.alert("来自crm",data.msg,"error");
             }
         }
-    })
+    });
 }
+

@@ -1,12 +1,22 @@
 package com.shsxt.crm.controller;
 
+import com.shsxt.base.BaseController;
+import com.shsxt.crm.model.UserModel;
+import com.shsxt.crm.service.UserService;
+import com.shsxt.crm.utils.LoginUserUtil;
+import com.shsxt.crm.utils.UserIDBase64;
+import com.shsxt.crm.vo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class IndexController {
+public class IndexController extends BaseController {
+
+    @Resource
+    UserService userService;
 
     /**
      * 登录页
@@ -14,7 +24,6 @@ public class IndexController {
      */
     @RequestMapping("index")
     public String index(HttpServletRequest request){
-        request.setAttribute("ctx",request.getContextPath());
         return "index";
     }
 
@@ -24,7 +33,8 @@ public class IndexController {
      */
     @RequestMapping("main")
     public String main(HttpServletRequest request){
-        request.setAttribute("ctx",request.getContextPath());
+        int userId = LoginUserUtil.releaseUserIdFromCookie(request);
+        request.setAttribute("user",  userService.selectByPrimaryKey(userId));
         return "main";
     }
 }

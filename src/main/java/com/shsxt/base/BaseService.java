@@ -1,5 +1,7 @@
 package com.shsxt.base;
 
+import com.shsxt.crm.model.ResultInfo;
+import com.shsxt.crm.vo.SaleChance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
@@ -102,4 +104,5 @@ public abstract class BaseService<T,ID> {
     public Integer deleteBatch(ID[] ids) throws DataAccessException{
         return baseMapper.deleteBatch(ids);
     }
+
 }

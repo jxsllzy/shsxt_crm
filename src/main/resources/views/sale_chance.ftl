@@ -80,10 +80,10 @@
                     <textarea rows="5" cols="50" id="description" name="description"></textarea>
                 </td>
             </tr>
-            <#--<tr>
+            <tr>
                 <td>指派给：</td>
                 <td><input class="easyui-combobox" id="assignMan" name="assignMan" data-options="panelHeight:'auto',editable:false,valueField:'trueName',textField:'trueName',url:'${ctx}/user/queryCustomerManager.do'"/></td>
-            </tr>-->
+            </tr>
         </table>
         <input name="id" type="hidden"/>
     </form>

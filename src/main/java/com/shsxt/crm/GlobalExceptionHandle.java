@@ -61,7 +61,7 @@ public class GlobalExceptionHandle implements HandlerExceptionResolver {
             }else {
                 //返回json
                 ResultInfo resultInfo = new ResultInfo();
-                resultInfo.setCode(200);
+                resultInfo.setCode(300);
                 resultInfo.setMsg("系统错误，请稍后重试");
                 if(e instanceof ParamsException){
                     ParamsException ex = (ParamsException) e;

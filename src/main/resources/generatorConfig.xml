@@ -4,51 +4,50 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="E:\Maven\warehouse\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
-    <context id="DB2Tables" targetRuntime="MyBatis3">
+    <!--数据库驱动-->
+    <classPathEntry    location="E:\Maven\warehouse\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar"/>
+    <context id="DB2Tables"    targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="true"/>
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
-        <!--数据库链接，账号密码-->
+        <!--数据库链接地址账号密码-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://127.0.0.1:3306/crm"
-                        userId="root"
-                        password="123456">
+                        userId="root" password="123456">
         </jdbcConnection>
 
-        <javaTypeResolver >
-            <property name="forceBigDecimals" value="false" />
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
 
-        <!--
-           设置实体类存放路径
-        -->
+
+        <!--生成Model类存放位置-->
         <javaModelGenerator targetPackage="com.shsxt.crm.vo" targetProject="F:\尚学堂\001_my_code\20200408\shsxt_crm\src\main\java">
-            <property name="enableSubPackages" value="true" />
-            <property name="trimStrings" value="true" />
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <!--
-           sql 映射文件路径
-        -->
-        <sqlMapGenerator targetPackage="mappers"  targetProject="F:\尚学堂\001_my_code\20200408\shsxt_crm\src\main\resources">
-            <property name="enableSubPackages" value="true" />
+
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mappers" targetProject="F:\尚学堂\001_my_code\20200408\shsxt_crm\src\main\resources">
+            <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <!--
-           接口文件存放路径
-        -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.shsxt.crm.dao"  targetProject="F:\尚学堂\001_my_code\20200408\shsxt_crm\src\main\java">
-            <property name="enableSubPackages" value="true" />
+
+        <!--生成Dao类存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.shsxt.crm.dao" targetProject="F:\尚学堂\001_my_code\20200408\shsxt_crm\src\main\java">
+            <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="t_user" domainObjectName="User"
+
+
+        <table tableName="t_sale_chance" domainObjectName="SaleChance"
                enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
     </context>
 </generatorConfiguration>
+

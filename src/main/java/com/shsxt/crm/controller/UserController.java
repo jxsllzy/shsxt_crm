@@ -30,17 +30,16 @@ public class UserController extends BaseController {
     @PostMapping("user/login")
     @ResponseBody
     public ResultInfo login(String userName, String userPwd){
-        ResultInfo resultInfo = new ResultInfo();
         UserModel userModel = userService.login(userName,userPwd);
-        resultInfo.setResult(userModel);
-        return resultInfo;
+        return success("用户登录成功",userModel);
     }
 
     @PostMapping("user/updatePassword")
     @ResponseBody
     public ResultInfo updatePassword(HttpServletRequest request,String oldPassword,String newPassword,String confirmPassword){
-        ResultInfo resultInfo = new ResultInfo();
         userService.updateUserPassword(LoginUserUtil.releaseUserIdFromCookie(request),oldPassword,newPassword,confirmPassword);
-        return resultInfo;
+        return success("密码更新成功");
     }
+
+
 }

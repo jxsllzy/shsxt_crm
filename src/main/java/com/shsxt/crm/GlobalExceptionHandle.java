@@ -1,5 +1,6 @@
 package com.shsxt.crm;
 
+import com.shsxt.crm.exception.NoLoginException;
 import com.shsxt.crm.exception.ParamsException;
 import com.shsxt.crm.model.ResultInfo;
 import com.shsxt.crm.utils.JsonUtil;
@@ -20,6 +21,19 @@ public class GlobalExceptionHandle implements HandlerExceptionResolver {
 
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
+        ModelAndView modelAndView = new ModelAndView();
+        /**
+         * 解决未登录异常
+         */
+        if(e instanceof NoLoginException){
+            NoLoginException ne = (NoLoginException) e;
+            modelAndView.setViewName("no_login");
+            modelAndView.addObject("msg",ne.getMsg());
+            modelAndView.addObject("ctx",request.getContextPath());
+            return modelAndView;
+        }
+
+
         /**
          *  方法返回值类型判断
          *  如果没有方法，返回300错误
@@ -29,7 +43,7 @@ public class GlobalExceptionHandle implements HandlerExceptionResolver {
          *  视图出现异常
          *      跳转404页面
          */
-        ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.setViewName("error");
         modelAndView.addObject("msg","系统错误，请稍后重试");
         modelAndView.addObject("code",400);

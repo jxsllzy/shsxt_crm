@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import javax.annotation.Resource;
 import java.util.List;
 
+@SuppressWarnings("all")
 public abstract class BaseService<T,ID> {
 
     @Autowired

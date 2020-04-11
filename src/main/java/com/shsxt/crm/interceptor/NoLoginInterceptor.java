@@ -1,5 +1,6 @@
 package com.shsxt.crm.interceptor;
 
+import com.shsxt.crm.exception.NoLoginException;
 import com.shsxt.crm.service.UserService;
 import com.shsxt.crm.utils.CookieUtil;
 import com.shsxt.crm.utils.LoginUserUtil;
@@ -24,8 +25,8 @@ public class NoLoginInterceptor extends HandlerInterceptorAdapter {
         int userId = LoginUserUtil.releaseUserIdFromCookie(request);
         User user = userService.selectByPrimaryKey(userId);
         if(userId==0||user==null){
-            response.sendRedirect(request.getContextPath()+"/index");
-            return false;
+            //如果没有登录，抛出异常，让异常页面跳转
+            throw new NoLoginException();
         }
         return true;
     }

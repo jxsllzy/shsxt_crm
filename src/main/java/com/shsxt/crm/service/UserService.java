@@ -71,7 +71,7 @@ public class UserService extends BaseService<User,Integer>{
         checkUpdatePwdParams(userId, oldPassword, newPassword, confirmPassword);
         User user = userMapper.selectByPrimaryKey(userId);
         user.setUserPwd(Md5Util.encode(newPassword));
-        userMapper.updateByPrimaryKeySelective(user);
+        updateByPrimaryKeySelective(user);
     }
 
     private void checkUpdatePwdParams(Integer userId, String oldPassword, String newPassword, String confirmPassword) {

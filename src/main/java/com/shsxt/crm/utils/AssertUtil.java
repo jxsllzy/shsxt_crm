@@ -11,7 +11,7 @@ public class AssertUtil {
      */
     public static void isTrue(boolean flag,String msg){
         if (flag){
-            throw  new ParamsException(msg);
+            throw new ParamsException(msg);
         }
     }
 }

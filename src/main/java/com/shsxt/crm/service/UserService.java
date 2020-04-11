@@ -68,10 +68,9 @@ public class UserService extends BaseService<User,Integer>{
          * 2、设置用户名新密码
          * 3、修改密码
          */
-        checkUpdatePwdParams( userId, oldPassword, newPassword, confirmPassword);
-        oldPassword = Md5Util.encode(oldPassword);
+        checkUpdatePwdParams(userId, oldPassword, newPassword, confirmPassword);
         User user = userMapper.selectByPrimaryKey(userId);
-        user.setUserPwd(Md5Util.encode(oldPassword));
+        user.setUserPwd(Md5Util.encode(newPassword));
         userMapper.updateByPrimaryKeySelective(user);
     }
 

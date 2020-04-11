@@ -31,16 +31,8 @@ public class UserController extends BaseController {
     @ResponseBody
     public ResultInfo login(String userName, String userPwd){
         ResultInfo resultInfo = new ResultInfo();
-        try {
-            UserModel userModel = userService.login(userName,userPwd);
-            resultInfo.setResult(userModel);
-        }catch (ParamsException e){
-            resultInfo.setCode(e.getCode());
-            resultInfo.setMsg(e.getMsg());
-        } catch (Exception e) {
-            resultInfo.setCode(500);
-            resultInfo.setMsg("登录异常");
-        }
+        UserModel userModel = userService.login(userName,userPwd);
+        resultInfo.setResult(userModel);
         return resultInfo;
     }
 
@@ -48,15 +40,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public ResultInfo updatePassword(HttpServletRequest request,String oldPassword,String newPassword,String confirmPassword){
         ResultInfo resultInfo = new ResultInfo();
-        try {
-            userService.updateUserPassword(LoginUserUtil.releaseUserIdFromCookie(request),oldPassword,newPassword,confirmPassword);
-        } catch (ParamsException e){
-            resultInfo.setCode(e.getCode());
-            resultInfo.setMsg(e.getMsg());
-        } catch (Exception e) {
-            resultInfo.setCode(500);
-            resultInfo.setMsg("更新异常");
-        }
+        userService.updateUserPassword(LoginUserUtil.releaseUserIdFromCookie(request),oldPassword,newPassword,confirmPassword);
         return resultInfo;
     }
 }

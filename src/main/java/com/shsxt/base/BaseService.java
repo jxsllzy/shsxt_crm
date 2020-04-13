@@ -1,12 +1,16 @@
 package com.shsxt.base;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.shsxt.crm.model.ResultInfo;
 import com.shsxt.crm.vo.SaleChance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("all")
 public abstract class BaseService<T,ID> {
@@ -103,6 +107,18 @@ public abstract class BaseService<T,ID> {
      */
     public Integer deleteBatch(ID[] ids) throws DataAccessException{
         return baseMapper.deleteBatch(ids);
+    }
+
+    /**
+     * 分页查询
+     */
+    public Map<String,Object> queryByParams(BaseQuery baseQuery){
+        Map<String,Object> result = new HashMap<>();
+        PageHelper.startPage(baseQuery.getPage(),baseQuery.getRows());
+        PageInfo<T> pageInfo = new PageInfo<T>(selectByParams(baseQuery));
+        result.put("total",pageInfo.getTotal());
+        result.put("rows",pageInfo.getList());
+        return result;
     }
 
 }
